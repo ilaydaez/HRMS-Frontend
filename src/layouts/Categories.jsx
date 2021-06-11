@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Menu, Dropdown, Input, } from 'semantic-ui-react'
 import CityList from '../pages/CityList'
 import JobPositionList from '../pages/JobPositionList'
@@ -9,6 +9,18 @@ import ForeignLanguageList from '../pages/ForeignLanguageList'
 import ProgrammingList from '../pages/ProgrammingList'
 
 export default function Categories() {
+
+  const [isItClicked, setIsItClicked] = useState(true)
+
+  function handleClicked() {
+    setIsItClicked(true)
+    
+  }
+
+  function handleNoClicked() {
+    setIsItClicked(false)
+  }
+
   return (
     <div>
 
@@ -20,17 +32,11 @@ export default function Categories() {
         <Menu.Item>
           <Menu.Menu>
             <JobPositionList />
-            <br></br>
             <CityList />
-            <br></br>
             <SchoolList/>
-            <br></br>
             <FacultyList/>
-            <br></br>
             <DepartmentList/>
-            <br></br>
             <ForeignLanguageList/>
-            <br></br>
             <ProgrammingList/>
           </Menu.Menu>
         </Menu.Item>

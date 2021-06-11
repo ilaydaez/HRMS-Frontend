@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Dropdown } from 'semantic-ui-react'
 import ProgrammingService from '../services/programmingService'
 
 export default function ProgrammingList() {
@@ -10,19 +11,30 @@ export default function ProgrammingList() {
         programmingService.getProgrammings().then(result => setProgrammings(result.data.data))
     })
 
+    const programming = programmings.map(programming => (
+        {
+            key: 'programming.programmingId',
+            text: (programming.programming),
+            value: (programming.programming)
+        }
+    ))
+
     return (
-        <div>
+        // <div>
 
-            <label htmlFor="programmings">Programming</label> <br></br>
-            <select name="" id="programmingId">
-                <option>Tümü</option>
-                {programmings.map((programming) => (
-                    <option key={programming.programmingId} value={programming}>
-                        {programming.position}
-                    </option>
-                ))}
-            </select>
+        //     <label htmlFor="programmings">Programming</label> <br></br>
+        //     <select name="" id="programmingId">
+        //         <option>Tümü</option>
+        //         {programmings.map((programming) => (
+        //             <option key={programming.programmingId} value={programming}>
+        //                 {programming.programming}
+        //             </option>
+        //         ))}
+        //     </select>
 
-        </div>
+        // </div>
+
+        <Dropdown icon='code' labeled
+        button className='icon' placeholder='Programming' multiple selection search options={programming} />
     )
 }
