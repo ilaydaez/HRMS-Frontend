@@ -26,6 +26,7 @@ export default function Navi() {
 
     }
     return (
+        
         <div>
             <Menu size='massive' inverted color='purple' >
                 <Container>
