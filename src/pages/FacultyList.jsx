@@ -9,11 +9,11 @@ export default function FacultyList() {
     useEffect(() => {
         let facultyService = new FacultyService()
         facultyService.getFaculties().then(result => setFaculties(result.data.data))
-    })
+    },[])
 
     const faculty = faculties.map(faculty => (
         {
-            key: 'faculty.facultyId',
+            // key: 'faculty.facultyId',
             text: (faculty.facultyName),
             value: (faculty.facultyName)
         }

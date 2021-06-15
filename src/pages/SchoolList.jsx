@@ -9,11 +9,11 @@ export default function SchoolList() {
     useEffect(() => {
         let schoolService = new SchoolService()
         schoolService.getSchools().then(result => setSchools(result.data.data))
-    })
+    },[])
 
     const school = schools.map(school => (
         {
-            key: 'school.schoolId',
+            // key: 'school.schoolId',
             text: (school.schoolName),
             value: (school.schoolName)
         }

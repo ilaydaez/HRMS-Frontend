@@ -9,11 +9,11 @@ export default function ProgrammingList() {
     useEffect(() => {
         let programmingService = new ProgrammingService()
         programmingService.getProgrammings().then(result => setProgrammings(result.data.data))
-    })
+    },[])
 
     const programming = programmings.map(programming => (
         {
-            key: 'programming.programmingId',
+            // key: 'programming.programmingId',
             text: (programming.programming),
             value: (programming.programming)
         }

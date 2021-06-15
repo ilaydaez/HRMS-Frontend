@@ -10,11 +10,11 @@ export default function DepartmentList() {
     useEffect(() => {
         let departmentService = new DepartmentService()
         departmentService.getDepartments().then(result => setDepartments(result.data.data))
-    })
+    },[])
 
     const department = departments.map(department => (
         {
-            key: 'department.departmentId',
+            key: department.departmentId,
             text: (department.departmentName),
             value: (department.departmentName)
         }

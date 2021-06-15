@@ -9,7 +9,7 @@ export default function UserList() {
     useEffect(() => {
         let userService = new UserService()
         userService.getUsers().then(result => setUsers(result.data.data))
-    })
+    },[])
 
     return (
         <div>

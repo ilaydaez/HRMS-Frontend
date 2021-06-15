@@ -10,11 +10,11 @@ export default function JobPositionList() {
   useEffect(() => {
     let jobPositionService = new JobPositionService()
     jobPositionService.getJobPositions().then(result => setJobPosition(result.data.data))
-  })
+  },[])
 
   const position = jobPositions.map(position=> (
      {
-       key:'position.positionId',
+      //  key:'position.positionId',
        text : (position.position),
        value: (position.position)
      }

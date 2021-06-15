@@ -13,7 +13,7 @@ export default function CityList() {
 
     const city = cities.map(city => (
         {
-            key: 'city.cityId',
+            // key: ('city.cityId'),
             text: (city.city),
             value: (city.city)
         }

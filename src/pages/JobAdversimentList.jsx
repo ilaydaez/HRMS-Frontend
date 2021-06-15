@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table } from 'semantic-ui-react'
-import { Button, Card, Image, Divider } from 'semantic-ui-react'
+import { Button, Card, Image } from 'semantic-ui-react'
 import JobAdvesimentService from '../services/jobAdversimentService'
 
 export default function JobAdversimentList() {
@@ -10,7 +9,7 @@ export default function JobAdversimentList() {
     useEffect(() => {
         let jobAdversimentService = new JobAdvesimentService()
         jobAdversimentService.getJobAdversiments().then(result => setJobAdversiment(result.data.data))
-    })
+    },[])
 
     return (
         <div>
@@ -52,15 +51,15 @@ export default function JobAdversimentList() {
 
             {
                 jobAdversiments.map(adversiment => (
-                    <Card.Group singleLine>
+                    <Card.Group key={adversiment.adversimentId}>
                         <Card fluid>
                             <Card.Content>
                                 <Image 
+                                floated='left'
                                 src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ51xCBVsAzl07KiuMVcwJSFOITkI2S59a0Qgu8GnBuxeQZJcBkN37-gb49BfabGATulc&usqp=CAU'} 
-                                size='tiny' 
+                                size='mini' 
                                 circular verticalAlign='bottom'
                                     />
-                                <Divider />
                                 <Card.Header>{adversiment.position?.position}</Card.Header>
                                 <Card.Meta>{adversiment.employer?.companyName}</Card.Meta>
                                 <Card.Description>

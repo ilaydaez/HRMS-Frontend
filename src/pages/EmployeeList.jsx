@@ -9,7 +9,7 @@ export default function EmployeeList() {
     useEffect(() => {
         let employeeService = new EmployeeService()
         employeeService.getEmployees().then(result => setEmployee(result.data.data))
-    })
+    },[])
 
     return (
         <div>
@@ -25,7 +25,6 @@ export default function EmployeeList() {
                 </Table.Header>
 
                 <Table.Body>
-                    <Table.Row>
                     {
                         employees.map((employee) => (
                             <Table.Row key={employee.id}>
@@ -37,7 +36,6 @@ export default function EmployeeList() {
                             </Table.Row>
                         ))
                     }
-                    </Table.Row>
                 </Table.Body>
             </Table>
         </div>

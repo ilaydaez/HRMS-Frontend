@@ -10,11 +10,11 @@ export default function ForeignLanguageList() {
     useEffect(() => {
         let foreignLanguageService = new ForeignLanguageService()
         foreignLanguageService.getLanguages().then(result => setLanguages(result.data.data))
-    })
+    }, [])
 
     const language = languages.map(language => (
         {
-            key: 'language.languageId',
+            key: language.languageId,
             text: (language.language),
             value: (language.language)
         }
@@ -37,6 +37,6 @@ export default function ForeignLanguageList() {
         // </div>
 
         <Dropdown icon='language' labeled
-        button className='icon' placeholder='Language' multiple selection search options={language} />
+            button className='icon' placeholder='Language' multiple selection search options={language} />
     )
 }

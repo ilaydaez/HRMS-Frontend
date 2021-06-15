@@ -1,64 +1,73 @@
-import React from 'react'
-import { Menu, Button, Dropdown, Input, Container, Select } from 'semantic-ui-react'
-import { Grid } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router'
+import { Menu, Button, Input, Container, Dropdown } from 'semantic-ui-react'
 import CityList from '../pages/CityList'
 import CartSummary from './CartSummary'
+import SignedOut from './SignedOut'
+import SignedIn from './SignedIn'
 
-const options = [
-    { key: 'employee', icon: 'user circle', text: 'Employee', value: 'employee' },
-    { key: 'employer', icon: 'user circle', text: 'Employer', value: 'employer' },]
+
 
 export default function Navi() {
 
+    const [isAuthenticated, setIsAuthenticated] = useState(true)
+
+    const history = useHistory()
+
+    function handleSignOut(params) {
+        setIsAuthenticated(false)
+        history.push('/')
+
+    }
+
+    function handleSignIn(params) {
+        setIsAuthenticated(true)
+
+    }
     return (
         <div>
-            {/* <Segment inverted> */}
-            <Menu size='massive' inverted color='purple' fixed >
+            <Menu size='massive' inverted color='purple' >
                 <Container>
 
-                    <Menu.Item
+                    <Menu.Item as={NavLink} to='/'
                         name='HRMS'
                     />
-                    <Menu.Item
+                    <Menu.Item as={NavLink} to='/'
                         name='Find a job'
                     />
-                    <Menu.Item
+                    <Menu.Item as={NavLink} to='/cv'
                         name='Resume'
                     />
+                    <Menu.Item>
+                        <Dropdown pointing='top left' text='Users'>
+                            <Dropdown.Menu>
+                                <Dropdown.Item as={NavLink} to='/employee' text='Employee' />
+                                <Dropdown.Item as={NavLink} to='/employer' text='Employer' />
+                                <Dropdown.Item as={NavLink} to='/systemPersonnel' text='System Personnel' />
+                            </Dropdown.Menu>
+
+                        </Dropdown>
+
+                    </Menu.Item>
+
+
+
 
                     <Menu.Menu position='right'>
                         <CartSummary />
-
-                        <Button.Group inverted color='teal'>
-                            <Button>Log-in</Button>
-                            <Button.Or />
-                            <Button positive>Sign Up</Button>
-                            <Dropdown
-                                className='button icon'
-                                floating
-                                options={options}
-                                trigger={<></>}
-                            />
-                        </Button.Group>
+                        {isAuthenticated ? <SignedIn signOut={handleSignOut} bisey="1" /> : <SignedOut signIn={handleSignIn} />}
                     </Menu.Menu>
-
                 </Container>
-
             </Menu>
 
-            <Input center type='text' placeholder='Position/CompanyName...' action>
+            <Input type='text' placeholder='Position/CompanyName...' action>
                 <input />
 
                 <CityList />
 
                 <Button color='teal' type='submit'>Search</Button>
             </Input>
-
-
-
-            {/* </Segment> */}
-
-
         </div>
     )
 }

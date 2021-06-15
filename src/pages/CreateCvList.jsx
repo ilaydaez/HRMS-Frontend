@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Table } from 'semantic-ui-react'
+import {Card, Image } from 'semantic-ui-react'
 import CreateCvService from '../services/createCvService'
 
 export default function CreateCvList() {
@@ -7,13 +7,13 @@ export default function CreateCvList() {
     const [cvs, setCreateCV] = useState([])
 
     useEffect(() => {
-        let creteCvService = new CreateCvService()
-        creteCvService.getCvs().then(result => setCreateCV(result.data.data))
-    })
+        let createCvService = new CreateCvService()
+        createCvService.getByCvWithEmployees().then(result => setCreateCV(result.data.data))
+    },[])
 
     return (
         <div>
-            <Table singleLine>
+            {/* <Table singleLine>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>First Name</Table.HeaderCell>
@@ -67,7 +67,41 @@ export default function CreateCvList() {
                     }
 
                 </Table.Body>
-            </Table>
+            </Table>  */}
+
+             {
+                cvs.map(cv => (
+                    <Card.Group  key={cv.cvId}>
+                        <Card fluid>
+                            <Card.Content>
+                                <Image 
+                                floated='left'
+                                src={'https://cdn2.iconfinder.com/data/icons/green-2/32/expand-color-web2-23-512.png'} 
+                                size='mini' 
+                                circular verticalAlign='bottom'
+                                    />
+                                
+                                <Card.Header>{cv.firstName} {cv.lastName}</Card.Header>
+                                {/* <Card.Meta>{cv.schools?.faculties?.departments.departmentName}</Card.Meta>
+                                <Card.Description>
+                                {cv.jobDescription}
+                                </Card.Description> */}
+                            </Card.Content>
+
+                            {/* <Card.Content extra>
+                                <div>
+                                    <Button basic
+                                        floated='right'
+                                        icon='heart'
+                                        label={{ basic: true, color: 'grey', pointing: 'left', content: 'ilanı kaydet' }}
+                                    />
+                                </div>
+                            </Card.Content> */}
+                        </Card>
+
+                    </Card.Group>
+                ))
+            }
 
         </div>
     )

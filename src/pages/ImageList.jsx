@@ -9,7 +9,7 @@ export default function ImageList() {
     useEffect(() => {
         let imageService = new ImageService()
         imageService.getImages().then(result => setImage(result.data.data))
-    })
+    },[])
 
     return (
         <div>

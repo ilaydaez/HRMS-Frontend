@@ -9,7 +9,7 @@ export default function SystemPersonnelList() {
     useEffect(() => {
         let personnelService = new SystemPersonnelService()
         personnelService.getPersonnel().then(result => setPersonnel(result.data.data))
-    })
+    },[])
 
     return (
         <div>

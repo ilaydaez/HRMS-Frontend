@@ -2,6 +2,7 @@ import React from 'react'
 import UserList from '../pages/UserList'
 import Categories from './Categories'
 import { Grid, Tab } from 'semantic-ui-react'
+import { Route } from 'react-router'
 import JobAdversimentList from '../pages/JobAdversimentList'
 import SystemPersonnelList from '../pages/SystemPersonnelList'
 import EmployeeList from '../pages/EmployeeList'
@@ -13,26 +14,6 @@ const panes = [
     {
         menuItem: 'User',
         render: () => <Tab.Pane attached={false}><UserList/></Tab.Pane>,
-    },
-    {
-        menuItem: 'System Personnel',
-        render: () => <Tab.Pane attached={false}><SystemPersonnelList/></Tab.Pane>,
-    },
-    {
-        menuItem: 'Employee',
-        render: () => <Tab.Pane attached={false}><EmployeeList/></Tab.Pane>,
-    },
-    {
-        menuItem: 'Employer',
-        render: () => <Tab.Pane attached={false}><EmployerList/></Tab.Pane>,
-    },
-    {
-        menuItem: 'Job Adversiment',
-        render: () => <Tab.Pane attached={false}><JobAdversimentList /></Tab.Pane>,
-    },
-    {
-        menuItem: 'Cv',
-        render: () => <Tab.Pane attached={false}><CreateCvList/></Tab.Pane>,
     },
     {
         menuItem: 'Image',
@@ -50,7 +31,13 @@ export default function Dashboard() {
                     </Grid.Column>
 
                     <Grid.Column width={12}>
-                        <Tab panes={panes}/>
+                        <Route exact path='/' component={JobAdversimentList}/>
+                        <Route exact path='/cv' component={CreateCvList}/>
+                        <Route exact path='/employee' component={EmployeeList}/>
+                        <Route exact path='/employer' component={EmployerList}/>
+                        <Route exact path='/systemPersonnel' component={SystemPersonnelList}/>
+
+                         {/* <Tab panes={panes}/> */}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
