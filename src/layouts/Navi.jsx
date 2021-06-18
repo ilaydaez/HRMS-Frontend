@@ -26,15 +26,15 @@ export default function Navi() {
 
     }
     return (
-        
+
         <div>
+            
             <Menu size='massive' inverted color='purple' >
                 <Container>
-
-                    <Menu.Item as={NavLink} to='/'
+                    <Menu.Item as={NavLink} to='/jobAdversiments'
                         name='HRMS'
                     />
-                    <Menu.Item as={NavLink} to='/'
+                    <Menu.Item as={NavLink} to='/jobAdversiments'
                         name='Find a job'
                     />
                     <Menu.Item as={NavLink} to='/cv'
@@ -51,10 +51,6 @@ export default function Navi() {
                         </Dropdown>
 
                     </Menu.Item>
-
-
-
-
                     <Menu.Menu position='right'>
                         <CartSummary />
                         {isAuthenticated ? <SignedIn signOut={handleSignOut} bisey="1" /> : <SignedOut signIn={handleSignIn} />}

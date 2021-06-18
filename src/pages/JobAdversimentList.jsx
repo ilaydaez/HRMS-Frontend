@@ -1,89 +1,69 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Image } from 'semantic-ui-react'
+import { Link, NavLink } from 'react-router-dom'
+import { Button, Card, Image, Popup, Grid } from 'semantic-ui-react'
 import JobAdvesimentService from '../services/jobAdversimentService'
 
-export default function JobAdversimentList() {
+export default function JobAdversimentList({openPage}) {
 
-    const [jobAdversiments, setJobAdversiment] = useState([])
+    const [jobAdversiments, setJobAdversiments] = useState([])
+
 
     useEffect(() => {
         let jobAdversimentService = new JobAdvesimentService()
-        jobAdversimentService.getJobAdversiments().then(result => setJobAdversiment(result.data.data))
-    },[])
+        jobAdversimentService.getJobAdversiments().then(result => setJobAdversiments(result.data.data))
+    }, [])
+
+
 
     return (
         <div>
-            {/* <Table singleLine>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Position</Table.HeaderCell>
-                        <Table.HeaderCell>Description</Table.HeaderCell>
-                        <Table.HeaderCell>City</Table.HeaderCell>
-                        <Table.HeaderCell>Minimum Salary</Table.HeaderCell>
-                        <Table.HeaderCell>Maxsimum Salary</Table.HeaderCell>
-                        <Table.HeaderCell>Application Deadline</Table.HeaderCell>
-                        <Table.HeaderCell>Listing Date</Table.HeaderCell>
-                        <Table.HeaderCell>Active or Pasive</Table.HeaderCell>
-                        <Table.HeaderCell>Open Position</Table.HeaderCell>
-
-                    </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                    {
-                        jobAdversiments.map((jobAdversiment) => (
-                            <Table.Row key={jobAdversiment.adversimentId}>
-                                <Table.Cell>{jobAdversiment.position}</Table.Cell>
-                                <Table.Cell>{jobAdversiment.description}</Table.Cell>
-                                <Table.Cell>{jobAdversiment.cities.city}</Table.Cell>
-                                <Table.Cell>{jobAdversiment.minSalary}</Table.Cell>
-                                <Table.Cell>{jobAdversiment.maxSalary}</Table.Cell>
-                                <Table.Cell>{jobAdversiment.applicationDeadline}</Table.Cell>
-                                <Table.Cell>{jobAdversiment.listingDate}</Table.Cell>
-                                <Table.Cell>{jobAdversiment.active}</Table.Cell>
-                                <Table.Cell>{jobAdversiment.openPosition}</Table.Cell>
-                            </Table.Row>
-                        ))
-                    }
-
-                </Table.Body>
-            </Table> */}
+            <Grid>
+                <Grid.Column>
+                    <Popup
+                                      
+                        trigger={
+                            <Button
+                            onClick={openPage}
+                                as={NavLink}
+                                to='/jobAdversimentForm'
+                                color='teal'
+                                floated='right'
+                                icon='add'
+                                content='Post a job' />}
+                        content='Post active job posting.'
+                        on='hover'
+                    />
+                </Grid.Column>
+            </Grid>
 
             {
                 jobAdversiments.map(adversiment => (
+
                     <Card.Group key={adversiment.adversimentId}>
                         <Card fluid>
                             <Card.Content>
-                                <Image 
-                                floated='left'
-                                src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ51xCBVsAzl07KiuMVcwJSFOITkI2S59a0Qgu8GnBuxeQZJcBkN37-gb49BfabGATulc&usqp=CAU'} 
-                                size='mini' 
-                                circular verticalAlign='bottom'
-                                    />
-                                <Card.Header>{adversiment.position?.position}</Card.Header>
+                                <Image
+                                    floated='left'
+                                    src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ51xCBVsAzl07KiuMVcwJSFOITkI2S59a0Qgu8GnBuxeQZJcBkN37-gb49BfabGATulc&usqp=CAU'}
+                                    size='mini'
+                                    circular verticalAlign='bottom'
+                                />
+                                <Card.Header><Link to={`/jobAdversiments/${adversiment.adversimentId}`}>{adversiment.position?.position}</Link></Card.Header>
                                 <Card.Meta>{adversiment.employer?.companyName}</Card.Meta>
                                 <Card.Description>
                                     {adversiment.description}
                                 </Card.Description>
-                            </Card.Content>
-
-                            <Card.Content extra>
-                                <div>
-                                    <Button basic
-                                        floated='right'
-                                        icon='heart'
-                                        label={{ basic: true, color: 'grey', pointing: 'left', content: 'ilanı kaydet' }}
-                                    />
-                                </div>
+                                <Button basic
+                                    floated='right'
+                                    icon='heart'
+                                    label={{ basic: true, color: 'grey', pointing: 'left', content: 'ilanı kaydet' }}
+                                />
                             </Card.Content>
                         </Card>
 
                     </Card.Group>
                 ))
             }
-
-
-
 
         </div>
     )
