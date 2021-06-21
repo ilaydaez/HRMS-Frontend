@@ -10,8 +10,8 @@ export default function JobAdversimentForm() {
 
     return (
         <div>
-           <Container>
-           <Header as='h2'>
+            <Container>
+                <Header as='h2'>
                     <Icon name='announcement' />
                     <Header.Content>New Job Adversiment</Header.Content>
                 </Header>
@@ -76,8 +76,8 @@ export default function JobAdversimentForm() {
 
                     </Form>
                 </Segment>
-           </Container>
-                
+            </Container>
+
 
 
         </div>

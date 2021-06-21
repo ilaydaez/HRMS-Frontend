@@ -15,7 +15,9 @@ export default function Dashboard() {
     return (
         <div>
             <Grid>
+            <Grid.Column width={12}>
                 <Route exact path='/jobAdversimentForm' component={JobAdversimentForm} />
+                </Grid.Column>
             </Grid>
             <Grid>
                 <Grid.Row>
