@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useParams } from "react-router";
 import { Item, Image, Button, Icon } from 'semantic-ui-react'
 import JobAdvesimentService from '../../services/jobAdversimentService'
+import { addToApplication } from '../../store/actions/applicationAction'
+import {toast} from 'react-toastify'
 
 
 export default function JobAdversimentDto() {
+
+    const dispatch = useDispatch()
 
     let { id } = useParams();
 
@@ -14,6 +19,11 @@ export default function JobAdversimentDto() {
         let jobAdversimentService = new JobAdvesimentService()
         jobAdversimentService.getByJobAdversimentId(id).then(result => setJobAdversiment(result.data.data))
     }, [])
+
+    const handleAddToApplication =(jobAdversiment)=>{
+        dispatch(addToApplication(jobAdversiment))
+        toast.success(`${jobAdversiment.position?.position} Başvuru İşlemi Başarıyla Tamamlandı`)
+    }
 
     return (
         <div>
@@ -33,7 +43,7 @@ export default function JobAdversimentDto() {
                         <Item.Extra> Application Deadline: {jobAdversiment.applicationDeadline}</Item.Extra>
                         <Item.Extra> Listing Date : {jobAdversiment.listingDate}</Item.Extra>
                         <Item.Extra>
-                            <Button color='teal' floated='right'>
+                            <Button onClick={()=> handleAddToApplication(jobAdversiment)} color='teal' floated='right'>
                                 Apply
                                 <Icon name='right chevron' />
                             </Button>

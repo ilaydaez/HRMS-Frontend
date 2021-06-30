@@ -6,10 +6,13 @@ import CityList from '../pages/CityList'
 import CartSummary from './CartSummary'
 import SignedOut from './SignedOut'
 import SignedIn from './SignedIn'
+import { useSelector } from 'react-redux'
 
 
 
 export default function Navi() {
+
+    const { applicationItems } = useSelector(state => state.application)
 
     const [isAuthenticated, setIsAuthenticated] = useState(true)
 
@@ -28,7 +31,7 @@ export default function Navi() {
     return (
 
         <div>
-            
+
             <Menu size='massive' inverted color='purple' >
                 <Container>
                     <Menu.Item as={NavLink} to='/jobAdversiments'
@@ -37,7 +40,7 @@ export default function Navi() {
                     <Menu.Item as={NavLink} to='/jobAdversiments'
                         name='Find a job'
                     />
-                    <Menu.Item as={NavLink} to='/cv'
+                    <Menu.Item as={NavLink} to='/profile'
                         name='Resume'
                     />
                     <Menu.Item>
@@ -52,7 +55,9 @@ export default function Navi() {
 
                     </Menu.Item>
                     <Menu.Menu position='right'>
-                        <CartSummary />
+
+                        {applicationItems.length > 0 && <CartSummary />}
+
                         {isAuthenticated ? <SignedIn signOut={handleSignOut} bisey="1" /> : <SignedOut signIn={handleSignIn} />}
                     </Menu.Menu>
                 </Container>

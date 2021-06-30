@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import { Accordion, Dropdown, Form, Label, Menu, Select } from 'semantic-ui-react'
 import CityService from '../services/citiyService'
+
+
+
+
 
 export default function CityList() {
 
@@ -18,9 +22,16 @@ export default function CityList() {
         }
     ))
 
+    const Cities = (
+        <Form>
+            <Form.Group grouped>
+                <Form.Checkbox label={city} name='city' value={city} />
+            </Form.Group>
+        </Form>
+    )
+
     return (
-        
-        <Dropdown icon='world' labeled
-        button className='icon' placeholder='City' multiple selection search options={city} />
+         <Dropdown icon='world' labeled
+         button className='icon' placeholder='City' multiple selection search options={city} />
     )
 }

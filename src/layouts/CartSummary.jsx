@@ -1,7 +1,11 @@
 import React from 'react'
-import { Dropdown, Menu } from 'semantic-ui-react'
+import { useSelector } from 'react-redux'
+import { Dropdown, Menu, Label } from 'semantic-ui-react'
 
 export default function CartSummary() {
+
+    const { applicationItems } = useSelector(state => state.application)
+
     return (
         <div>
             <Menu.Item>
