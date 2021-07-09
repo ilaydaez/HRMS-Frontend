@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Accordion, Dropdown, Form, Label, Menu, Select } from 'semantic-ui-react'
+import { Dropdown, Form } from 'semantic-ui-react'
 import CityService from '../services/citiyService'
 
 

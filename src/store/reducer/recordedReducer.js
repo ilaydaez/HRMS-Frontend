@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { ADD_TO_RECORDED } from '../actions/recordedAction';
 import {recordedItems} from "../initialValue/recordedItems"
 

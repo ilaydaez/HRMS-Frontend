@@ -21,7 +21,7 @@ export default function CreateCvList() {
                         trigger={
                             <Button
                                 as={NavLink}
-                                to='/profile/cvAdd'
+                                to='/cvAdd'
                                 color='teal'
                                 floated='right'
                                 icon='add'
@@ -47,9 +47,9 @@ export default function CreateCvList() {
                                     circular verticalAlign='bottom'
                                 />
 
-                                <Card.Header>{cv.firstName} {cv.lastName}</Card.Header>
+                                <Card.Header as={NavLink} to={`/profile/${cv.cvId}`}>{cv.firstName} {cv.lastName}</Card.Header>
 
-                                <Button as={NavLink} to='/profile/resumeUpdate' floated='right' size='mini' color='teal'>Update</Button>
+                                <Button as={NavLink} to={`/resumeUpdate/${cv.cvId}`} floated='right' size='mini' color='teal'>Update</Button>
                             </Card.Content>
                         </Card>
                     </Card.Group>

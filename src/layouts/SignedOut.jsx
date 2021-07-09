@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { Button, Menu } from 'semantic-ui-react'
 
 export default function SignedOut({signIn}) {
@@ -6,9 +7,9 @@ export default function SignedOut({signIn}) {
         <div>
             <Menu.Item>
                 <Button.Group inverted color='teal'>
-                    <Button onClick={signIn}>Log-in</Button>
+                    <Button as={NavLink} to='/login' onClick={signIn}>Log-in</Button>
                     <Button.Or />
-                    <Button onClick={signIn} positive>Sign Up</Button>
+                    <Button as={NavLink} to='/signUp' onClick={signIn} positive>Sign Up</Button>
                 </Button.Group>
             </Menu.Item>
         </div>

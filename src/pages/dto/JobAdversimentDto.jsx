@@ -14,10 +14,16 @@ export default function JobAdversimentDto() {
     let { id } = useParams();
 
     const [jobAdversiment, setJobAdversiment] = useState([])
+    const [workingTime, setWorkingTime] = useState([])
 
     useEffect(() => {
         let jobAdversimentService = new JobAdvesimentService()
         jobAdversimentService.getByJobAdversimentId(id).then(result => setJobAdversiment(result.data.data))
+    }, [])
+
+    useEffect(() => {
+        let jobAdversimentService = new JobAdvesimentService()
+        jobAdversimentService.getJobAdversimentWithWorkingTime().then(result => setWorkingTime(result.data.data))
     }, [])
 
     const handleAddToApplication =(jobAdversiment)=>{
@@ -40,6 +46,7 @@ export default function JobAdversimentDto() {
                         <Item.Extra> Open Position: {jobAdversiment.openPosition}</Item.Extra>
                         <Item.Extra> Min salary: {jobAdversiment.minSalary}</Item.Extra>
                         <Item.Extra> Min salary: {jobAdversiment.maxSalary}</Item.Extra>
+                        <Item.Extra> Working Time: {workingTime.time}</Item.Extra>
                         <Item.Extra> Application Deadline: {jobAdversiment.applicationDeadline}</Item.Extra>
                         <Item.Extra> Listing Date : {jobAdversiment.listingDate}</Item.Extra>
                         <Item.Extra>

@@ -13,11 +13,17 @@ export default function JobAdversimentList({ openPage }) {
     let { id } = useParams();
 
     const [jobAdversiments, setJobAdversiments] = useState([])
+    const [workingTime, setWorkingTime] = useState([])
 
 
     useEffect(() => {
         let jobAdversimentService = new JobAdvesimentService()
         jobAdversimentService.getJobAdversiments(id).then(result => setJobAdversiments(result.data.data))
+    }, [])
+
+    useEffect(() => {
+        let jobAdversimentService = new JobAdvesimentService()
+        jobAdversimentService.getJobAdversimentWithWorkingTime().then(result => setWorkingTime(result.data.data))
     }, [])
 
     const handleAddToRecorded = (jobAdversiment) => {
@@ -66,7 +72,7 @@ export default function JobAdversimentList({ openPage }) {
                                     {jobAdversiment.description}
                                 </Card.Description>
                                 <Label size="medium" attached="bottom left">
-                                    {jobAdversiment.workingTime?.time}
+                                    {workingTime.time}
                                 </Label>
                                 <Button basic
                                     onClick={() => handleAddToRecorded(jobAdversiment)}

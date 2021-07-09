@@ -1,15 +1,25 @@
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form } from 'formik'
 import React from 'react'
 import * as Yup from "yup"
-import HrmsTextInput from '../../utilities/customFormControls/HrmsTextInput'
 import { Button, FormField, Input, FormGroup, TextArea, Segment, Header, Icon, Container } from 'semantic-ui-react'
 import CityList from '../CityList'
 import JobPositionList from '../JobPositionList'
 import WorkingPositionList from '../WorkingPositionList'
 import WorkingTimeList from '../WorkingTimeList'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import JobAdvesimentService from '../../services/jobAdversimentService'
 
 
 export default function JobAdversimentAdd() {
+
+    let { values } = useParams();
+    const [add, setAdd] = useState([])
+    // useEffect(() => {
+    //     let jobAdversimentService = new JobAdvesimentService()
+    //     jobAdversimentService.add(values).then(result => setAdd(result.data.data))
+    // }, [])
 
     const initialValues = {
         companyName: "",
@@ -47,6 +57,7 @@ export default function JobAdversimentAdd() {
                 <Formik
                     initialValues={initialValues}
                     validationSchema={schema}
+                    onSubmit={(values)=>{console.log(values)}}
                 >
                     <Segment color='teal'>
                         <Form className="ui form">

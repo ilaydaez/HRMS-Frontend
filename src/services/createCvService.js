@@ -9,8 +9,12 @@ export default class CreateCvService {
         return axios.get("http://localhost:8080/api/createCvs/getByCvId?id="+id)
     }
 
-    putCvUpdate(cv) {
-        return axios.put("http://localhost:8080/api/createCvs/update")
+    getCvWithEmployeeCvId(id) {
+        return axios.get("http://localhost:8080/api/createCvs/getByCvWithEmployee_CvId?id="+id)
+    }
+
+    addCv(cv) {
+        return axios.post("http://localhost:8080/api/createCvs/add",cv)
     }
 
     getByCvWithEmployees() {

@@ -1,9 +1,24 @@
 import { Formik } from 'formik'
-import React from 'react'
-import { Card, CardGroup, Form, FormField, FormGroup, Header, Icon, Input, Segment, TextArea, Button, Image } from 'semantic-ui-react'
+import React, { useEffect, useState } from 'react'
+import { Card, CardGroup, Form, FormField, FormGroup, Header, Input, Segment, TextArea, Button, Image, Rating } from 'semantic-ui-react'
 import * as Yup from "yup"
+import DepartmentList from '../DepartmentList'
+import FacultyList from '../FacultyList'
+import ForeignLanguageList from '../ForeignLanguageList'
+import SchoolList from '../SchoolList'
+import CreateCvService from '../../services/createCvService'
+import { useParams } from 'react-router-dom'
+
+
 
 export default function CreateCvAdd() {
+
+    //     let {cv} =useParams()
+    //     const [cvAdd, setCvAdd] = useState([])
+    //     useEffect(() => {
+    //         let createCvService = new CreateCvService()
+    //         createCvService.addCv(cv).then(result=>setCvAdd(result.data.data))
+    // }, [])
 
     const initialValues = {
         firstName: '',
@@ -54,6 +69,7 @@ export default function CreateCvAdd() {
             <Formik
                 initialValues={initialValues}
                 validationSchema={schema}
+                onSubmit={(values)=>{console.log(values)}}
             >
                 <Segment color="teal">
                     <Form className="ui form">
@@ -77,6 +93,7 @@ export default function CreateCvAdd() {
                                         control={Input}
                                         label='First Name'
                                     />
+
 
                                     <FormField
                                         id='lastName'
@@ -160,23 +177,18 @@ export default function CreateCvAdd() {
 
                             <Card fluid raised>
                                 <FormGroup widths='equal'>
-                                    <FormField
-                                        id='schoolName'
-                                        control={Input}
-                                        label='School Name'
-                                    />
-
-                                    <FormField
-                                        id='facultyName'
-                                        control={Input}
-                                        label='Faculty Name'
-                                    />
-
-                                    <FormField
-                                        id='departmentName'
-                                        control={Input}
-                                        label='Department Name'
-                                    />
+                                    <FormField id='schoolName' >
+                                        <label>School</label>
+                                        <SchoolList />
+                                    </FormField>
+                                    <FormField id='facultyName'>
+                                        <label>Faculty</label>
+                                        <FacultyList />
+                                    </FormField>
+                                    <FormField id='departmentName'>
+                                        <label>Department</label>
+                                        <DepartmentList />
+                                    </FormField>
                                 </FormGroup>
 
                                 <FormGroup widths='equal'>
@@ -203,17 +215,17 @@ export default function CreateCvAdd() {
 
                             <Card fluid raised>
                                 <FormGroup widths='equal'>
-                                    <FormField
-                                        id='language'
-                                        control={Input}
-                                        label='Languge'
-                                    />
+                                    <FormField id='language'>
+                                        <label>Language</label>
+                                        <ForeignLanguageList />
+                                    </FormField>
 
                                     <FormField
                                         id='languageLevel'
-                                        control={Input}
-                                        label='Language Level'
-                                    />
+                                    >
+                                        <label>Language Level</label>
+                                        <Rating icon='star' defaultRating={0} maxRating={5} />
+                                    </FormField>
                                 </FormGroup>
                             </Card>
 

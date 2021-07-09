@@ -14,6 +14,10 @@ import ProfileDto from '../pages/dto/ProfileDto'
 import ApplicationsDto from '../pages/dto/ApplicationsDto'
 import CvUpdateForm from '../pages/forms/CvUpdateForm'
 import CreateCvAdd from '../pages/add/CreateCvAdd'
+import ResumeDto from '../pages/dto/resume/ResumeDto'
+import Home from './Home'
+import LoginForm from './LoginForm'
+import SignUpForm from './SignUpForm'
 
 
 export default function Dashboard() {
@@ -26,8 +30,12 @@ export default function Dashboard() {
                 <Grid.Column>
                     <Route exact path='/jobAdversimentAdd' component={JobAdversimentAdd} />
                     <Route exact path='/profile' component={ProfileDto} />
-                    <Route exact path='/profile/resumeUpdate' component={CvUpdateForm} />
-                    <Route exact path='/profile/cvAdd' component={CreateCvAdd} />
+                    <Route exact path='/resumeUpdate/:id' component={CvUpdateForm} />
+                    <Route exact path='/cvAdd' component={CreateCvAdd} />
+                    <Route exact path='/profile/:id' component={ResumeDto} />
+                    <Route exact path='/' component={Home} />
+                    <Route exact path='/login' component={LoginForm} />
+                    <Route exact path='/signUp' component={SignUpForm} />
                     
                     
                 </Grid.Column>
@@ -43,14 +51,12 @@ export default function Dashboard() {
                     <Grid.Column width={12}>
                         <Route exact path='/jobAdversiments' component={JobAdversimentList} />
                         <Route exact path='/jobAdversiments/:id' component={JobAdversimentDto} />
-                        <Route exact path='/cv' component={CreateCvList} />
+                        <Route exact path='/profile/cv' component={CreateCvList} />
                         <Route exact path='/employee' component={EmployeeList} />
                         <Route exact path='/employer' component={EmployerList} />
                         <Route exact path='/systemPersonnel' component={SystemPersonnelList} />
                         <Route exact path='/applications' component={ApplicationsDto} />
                         
-
-
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

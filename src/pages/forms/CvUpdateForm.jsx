@@ -1,22 +1,30 @@
 import { Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Card, CardGroup, Form, FormField, FormGroup, Header, Icon, Input, Segment, TextArea, Button, Image, Rating, Label } from 'semantic-ui-react'
+import { Card, CardGroup, Form, FormField, FormGroup, Header, Input, Segment, TextArea, Button, Image, Rating } from 'semantic-ui-react'
 import * as Yup from "yup"
 import CreateCvService from '../../services/createCvService'
 import SchoolList from '../SchoolList'
 import DepartmentList from '../DepartmentList'
 import FacultyList from '../FacultyList'
 import ForeignLanguageList from '../ForeignLanguageList'
+import { useParams } from 'react-router-dom'
 
 export default function CvUpdateForm() {
 
-    const [cv, setCv] = useState([])
+    let { id } = useParams();
+
+    const [cvId, setCv] = useState([])
+    const [cvEmployee, setCvEmployee] = useState([])
 
 
     useEffect(() => {
         let createCvService = new CreateCvService()
-        createCvService.getByCvWithEmployees().then(result => setCv(result.data.data))
+        createCvService.getCvId(id).then(result => setCv(result.data.data))
+    }, [])
+
+    useEffect(() => {
+        let createCvService = new CreateCvService()
+        createCvService.getCvWithEmployeeCvId(id).then(result => setCvEmployee(result.data.data))
     }, [])
 
     const initialValues = {
@@ -89,12 +97,16 @@ export default function CvUpdateForm() {
                                     <FormField
                                         id='firstName'
                                         control={Input}
+                                        defaultValue={cvEmployee.firstName}
                                         label='First Name'
-                                    />
+
+                                    >
+                                    </FormField>
 
                                     <FormField
                                         id='lastName'
                                         control={Input}
+                                        defaultValue={cvEmployee.lastName}
                                         label='Last Name'
                                     />
 
@@ -102,6 +114,7 @@ export default function CvUpdateForm() {
                                         id='birthDate'
                                         control={Input}
                                         type='date'
+                                        defaultValue={cvEmployee.birthDate}
                                         label='Birth Date'
                                     />
                                 </FormGroup>
@@ -111,6 +124,7 @@ export default function CvUpdateForm() {
                                         id='linkedin'
                                         control={Input}
                                         type='email'
+                                        defaultValue={cvId.linkedin}
                                         label='Linkedin Adress'
                                     />
 
@@ -118,6 +132,7 @@ export default function CvUpdateForm() {
                                         id='github'
                                         control={Input}
                                         type='email'
+                                        defaultValue={cvId.github}
                                         label='Github Adress'
                                     />
                                 </FormGroup>
@@ -126,6 +141,7 @@ export default function CvUpdateForm() {
                                     <FormField
                                         id='coverLetter'
                                         control={TextArea}
+                                        defaultValue={cvId.coverLetter}
                                         label='Cover Letter'
                                     />
                                 </FormGroup>
@@ -140,6 +156,7 @@ export default function CvUpdateForm() {
                                     <FormField
                                         id='companyName'
                                         control={Input}
+                                        defaultValue={cvId.companyName}
                                         label='Company Name'
                                     />
 
@@ -147,6 +164,7 @@ export default function CvUpdateForm() {
                                         id='jobStartDate'
                                         control={Input}
                                         type='date'
+                                        defaultValue={cvId.jobStartDate}
                                         label='Start Date'
                                     />
 
@@ -154,6 +172,7 @@ export default function CvUpdateForm() {
                                         id='jobFinishDate'
                                         control={Input}
                                         type='date'
+                                        defaultValue={cvId.jobFinishDate}
                                         label='Finish Date'
                                     />
                                 </FormGroup>
@@ -162,6 +181,7 @@ export default function CvUpdateForm() {
                                     <FormField
                                         id='jobDescription'
                                         control={TextArea}
+                                        defaultValue={cvId.jobDescription}
                                         label='Job Description'
                                     />
 
@@ -174,16 +194,26 @@ export default function CvUpdateForm() {
 
                             <Card fluid raised>
                                 <FormGroup widths='equal'>
-                                    <FormField id='schoolName' >
-                                        <label>School</label>
+                                    <FormField
+                                        id='schoolName'
+                                        control={Input}
+                                        defaultValue={cvId.schools?.schoolName}
+                                        label='School'
+                                    >
                                         <SchoolList />
                                     </FormField>
-                                    <FormField id='facultyName'>
-                                        <label>Faculty</label>
+                                    <FormField
+                                        id='facultyName'
+                                        control={Input}
+                                        defaultValue={cvId.schools?.faculties?.facultyName}
+                                        label='Faculty'>
                                         <FacultyList />
                                     </FormField>
-                                    <FormField id='departmentName'>
-                                        <label>Department</label>
+                                    <FormField
+                                        id='departmentName'
+                                        control={Input}
+                                        defaultValue={cvId.schools?.faculties?.departments?.departmentName}
+                                        label='Department'>
                                         <DepartmentList />
                                     </FormField>
                                 </FormGroup>
@@ -193,6 +223,7 @@ export default function CvUpdateForm() {
                                         id='schoolStartDate'
                                         control={Input}
                                         type='date'
+                                        defaultValue={cvId.schoolStartDate}
                                         label='Start Date'
                                     />
 
@@ -200,6 +231,7 @@ export default function CvUpdateForm() {
                                         id='schoolFinishDate'
                                         control={Input}
                                         type='date'
+                                        defaultValue={cvId.schoolFinishDate}
                                         label='Finish Date'
                                     />
 
@@ -212,16 +244,21 @@ export default function CvUpdateForm() {
 
                             <Card fluid raised>
                                 <FormGroup widths='equal'>
-                                    <FormField id='language'>
-                                        <label>Language</label>
+                                    <FormField
+                                        id='language'
+                                        control={Input}
+                                        defaultValue={cvId.foreignLanguages?.language}
+                                        label='Language'
+                                    >
                                         <ForeignLanguageList />
                                     </FormField>
 
                                     <FormField
                                         id='languageLevel'
+                                        control={Input}
+                                        label='Language Level'
                                     >
-                                        <label>Language Level</label>
-                                        <Rating icon='star' defaultRating={0} maxRating={5} />
+                                        <Rating icon='star' defaultRating={cvId.languageLevel} maxRating={5} />
                                     </FormField>
                                 </FormGroup>
 
@@ -237,6 +274,7 @@ export default function CvUpdateForm() {
                                     <FormField
                                         id='programName'
                                         control={Input}
+                                        defaultValue={cvId.programmings?.programName}
                                         label='Program Name'
                                     />
                                 </FormGroup>
